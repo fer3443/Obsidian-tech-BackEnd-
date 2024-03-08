@@ -20,14 +20,14 @@ async function AddUser(req, res) {
     if (existingUser) {
       return res.status(400).json({
         ok: false,
-        msg_error: "El nombre de usuario ya está en uso. Por favor elige otro",
+        message: "El nombre de usuario ya está en uso. Por favor elige otro",
       });
     }
     const alphanumericRegex = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
     if (!alphanumericRegex.test(password)) {
       return res.status(400).json({
         ok: false,
-        msg_error:
+        message:
           "La contraseña debe contener al menos 8 caracteres, incluyendo al menos una letra mayuscula y un numero.",
       });
     }
