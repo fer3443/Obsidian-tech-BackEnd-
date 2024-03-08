@@ -16,7 +16,7 @@ const base_error_objet = {
 async function AddUser(req, res) {
   try {
     const { email, password, photoUrl } = req.body;
-    const existingUser = await UserScheme.findOne({ userName });
+    const existingUser = await userScheme.findOne({ email });
     if (existingUser) {
       return res.status(400).json({
         ok: false,
