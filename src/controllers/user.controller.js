@@ -45,7 +45,6 @@ async function AddUser(req, res) {
       data_added: newUser,
     });
   } catch (err) {
-    console.log(err);
     return res.status(400).json({
       ok: false,
       message: err,
@@ -221,7 +220,7 @@ async function AddFavoriteProduct(req, res) {
     if (!user || !Product) {
       return res.status(404).json({
         ok: false,
-        error_msg: "Usuario o producto no encontrado",
+        message: "Usuario o producto no encontrado",
       });
     }
 
@@ -229,7 +228,7 @@ async function AddFavoriteProduct(req, res) {
     if (user.favoritos.includes(productId)) {
       return res.status(400).json({
         ok: false,
-        error_msg: "El producto ya está en la lista de favoritos",
+        message: "El producto ya está en la lista de favoritos",
       });
     }
     // Agregar el producto a la lista de favoritos del usuario
@@ -243,8 +242,7 @@ async function AddFavoriteProduct(req, res) {
   } catch (error) {
     return res.status(500).json({
       ok: false,
-      message: "Error al agregar el producto a favoritos",
-      error: error.message,
+      message: error,
     });
   }
 }
