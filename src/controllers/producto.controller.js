@@ -34,7 +34,11 @@ async function GetProductById(req, res) {
         message: 'Producto no encontrado'
       });
     }
-    res.json(producto);
+    return res.status(200).json({
+      ok: true,
+      producto: producto,
+      message: "peticion exitosa"
+    })
   } catch (error) {
     console.error('Error al obtener el producto 1:', error);
     res.status(500).json({
@@ -52,7 +56,7 @@ async function AddProductos(req, res) {
     if (!req.body.nombre || !req.body.categoria || !req.body.precio || !req.body.stock || !req.body.descripcion === '') {
       return res.status(400).json({
         ok: false,
-        mensaje: 'Todos los campos deben estar llenos',
+        mesage: 'Todos los campos deben estar llenos',
       });
     }
     const AddedProducto = await Productoschema.create(req.body);
