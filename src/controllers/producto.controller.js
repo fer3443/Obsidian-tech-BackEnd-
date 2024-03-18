@@ -108,9 +108,16 @@ async function DeleteProducto(req, res) {
   try {
     const { id } = req.params;
     const deletedProducto = await Productoschema.findByIdAndDelete(id);
+    if(!deletedProducto){
+      return res.status(404).json({
+        ok: false,
+        message: "Producto no encontrado"
+      })
+    }
     return res.status(201).json({
       ok: true,
       deleted_producto: deletedProducto,
+      message: "Producto eliminado con exito"
     });
   } catch (error) {
     return res.status(500).json({
